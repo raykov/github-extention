@@ -1,0 +1,273 @@
+.github {
+  color: #777777;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+  z-index: -100;
+}
+.github a {
+  color: #333333;
+}
+.github a:hover {
+    color: #666666;
+}
+.github ul.requests {
+  list-style-type: none;
+}
+.github ul.requests .avatar {
+  display: inline-block;
+  width: 105px;
+  height: 100px;
+}
+.github ul.requests .avatar img {
+  width: 100px;
+  height: 100px;
+}
+.github ul.requests .author {
+  font-weight: bold;
+}
+.github ul.requests .author-repo {
+  margin-bottom: 10px;
+}
+.github ul.requests .info {
+  width: 190px;
+  max-height: 100px;
+  height: 100px;
+  display: inline-block;
+  overflow:hidden;
+}
+
+.github ul.requests li.item {
+  width: 300px;
+  dispaly: inline-block;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  -webkit-border-radius: 5px 10px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding:5px;
+  background-color: #dddddd;
+}
+.github ul.requests li.item .pr {
+  font-size: 20px;
+  text-align: right;
+}
+
+* {
+
+
+
+
+}
+
+.notify
+{
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid black;
+  width:450px;
+  margin:50px auto;
+
+  font-family: "verdana", "Arial";
+  font-size: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  text-decoration: none;
+  box-sizing: border-box !important;
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  -ms-box-sizing: border-box !important;
+}
+
+.notify a {
+  font-family: "verdana", "Arial";
+  font-size: 12px;
+  list-style: none;
+  color: #fff;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+}
+.notify a:hover {
+  font-family: "verdana", "Arial";
+  font-size: 12px;
+  list-style: none;
+  color: #fff;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+div.notify .header-wrapper, div.notify .content-wrapper
+{
+  padding: 10px;
+  -moz-box-shadow: inset 0 2px 0 -1px rgba(255,255,255,0.2);
+  -webkit-box-shadow: inset 0 2px 0 -1px rgba(255,255,255,0.2);
+  box-shadow: inset 0 2px 0 -1px rgba(255,255,255,0.2);
+  font-family: "verdana", "Arial";
+  font-size: 12px;
+  list-style: none;
+
+  text-decoration: none;
+  box-sizing: border-box !important;
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  -ms-box-sizing: border-box !important;
+}
+
+div.notify .header-wrapper
+{
+  width: 100%;
+  display: table;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 1px solid #000;
+  background: #464646; /* Old browsers */
+  background: -moz-linear-gradient(top, #464646 0%, #3f3f3f 50%, #3f3f3f 51%, #3d3d3d 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#464646), color-stop(50%,#3f3f3f), color-stop(51%,#3f3f3f), color-stop(100%,#3d3d3d)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #464646 0%,#3f3f3f 50%,#3f3f3f 51%,#3d3d3d 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #464646 0%,#3f3f3f 50%,#3f3f3f 51%,#3d3d3d 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #464646 0%,#3f3f3f 50%,#3f3f3f 51%,#3d3d3d 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #464646 0%,#3f3f3f 50%,#3f3f3f 51%,#3d3d3d 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#464646', endColorstr='#3d3d3d',GradientType=0 ); /* IE6-9 */
+
+  font-family: "verdana", "Arial";
+  font-size: 12px;
+  text-decoration: none;
+  box-sizing: border-box !important;
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  -ms-box-sizing: border-box !important;
+}
+
+div.notify .header-wrapper .title
+{
+  font-family: "Helvetica";
+  font-size: 20px;
+  font-weight: bold;
+  color: #e6e6e6;
+  float: left;
+
+  font-family: "verdana", "Arial";
+  font-size: 12px;
+  text-decoration: none;
+  box-sizing: border-box !important;
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  -ms-box-sizing: border-box !important;
+}
+
+div.notify .header-wrapper .notifications
+{
+  font-family: "verdana";
+  font-size: 13px;
+  padding-left: 30px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #e6e6e6;
+  float: right;
+
+  font-family: "verdana", "Arial";
+  font-size: 12px;
+  text-decoration: none;
+  box-sizing: border-box !important;
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  -ms-box-sizing: border-box !important;
+}
+
+div.notify .content-wrapper
+{
+  display: table;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #555;
+  width:100%
+}
+
+div.notify .content-wrapper .lastest
+{
+  display: inline-block;
+  background: no-repeat left center;
+  padding-left: 64px;
+
+  height: 48px;
+  float: left;
+  color: white;
+  font-size: 16pt;
+}
+
+div.notify .content-wrapper .lastest .bold
+{
+  color: #6d84b4;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+div.notify .content-wrapper .lastest .comments
+{
+  margin-left: 15px;
+}
+
+div.notify .content-wrapper .number
+{
+  font-family: "Helvetica";
+  float: right;
+  color: white;
+  padding: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-left: 0px;
+
+  -moz-box-shadow:  0 1px 0 0 rgba(0,0,0,0.3),  0 -1px 0 0 rgba(255,255,255,0.3);
+  -webkit-box-shadow:  0 1px 0 0 rgba(0,0,0,0.3),  0 -1px 0 0 rgba(255,255,255,0.3);
+  box-shadow:  0 1px 0 0 rgba(0,0,0,0.3),  0 -1px 0 0 rgba(255,255,255,0.3);
+}
+
+.fa-user
+{
+  color:#fff!important;
+  font-size:4em;
+  display:inline-block;
+}
+.floatleft img,
+.floatright img {
+  width: 50px;
+}
+
+.floatleft{
+  float:left;
+  padding:0px 15px;
+  text-shadow:0px 1px 1px #000;
+  font-size:1em;
+  color:#fff
+}
+.floatleft-0-padding {
+  padding:0px;
+}
+.floatright{
+  float:right;
+  padding:0px 0px;
+  text-shadow:0px 1px 1px #000;
+  font-size:1em;
+  color:#fff;
+  vertical-align:top;
+}
+.pdtop{
+  padding-top: 5px;
+  line-height: 18px;
+  max-width: 270px;
+}
+
+.github ul.requests li.item {
+  width: auto;
+  dispaly: inline-block;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+#content { display: table; margin: 0 auto; padding: 30px; }
