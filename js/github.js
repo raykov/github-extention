@@ -1,8 +1,3 @@
-window.backgrounds = {
-  configs: {},
-  githubConfigs: {}
-};
-
 function requestReviewRequests() {
   const baseUrl = "https://api.github.com/search/issues";
   const url = `${baseUrl}?q=is:pr+is:open+review-requested:${backgrounds.githubConfigs.username}`;
@@ -61,14 +56,6 @@ function updateGithubView(requestsData) {
   });
 
   github.innerHTML = `<ul class="requests">${requests.join("")}</ul>`;
-}
-
-// chrome.storage.local.set({ githubConfigs: { authToken: "YOUR_TOKEN", username: "YOUR_GITHUB_USERNAME" } }, function() {});
-function loadGithubConfigsFromStorage(callback = () => {}) {
-  chrome.storage.local.get('githubConfigs', function(result) {
-    backgrounds.githubConfigs = result.githubConfigs || {};
-    callback();
-  });
 }
 
 loadGithubConfigsFromStorage(() => { requestReviewRequests(); });

@@ -1,16 +1,20 @@
 {
   "name": "Github review requests list",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Github review requests list",
   "manifest_version": 2,
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
   "background": {
-    "scripts": ["js/namespace.js"],
+    "scripts": ["js/onInstall.js"],
     "persistent": false
   },
   "permissions": [ "storage" ],
   "icons": {
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
   }
 }

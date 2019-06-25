@@ -1,0 +1,13 @@
+.form {
+  color: #777777;
+  font-family: 'Roboto', sans-serif;
+}
+
+.form label span {
+  width: 200px;
+  display: block;
+}
+
+.form label input {
+  width: 400px;
+}
