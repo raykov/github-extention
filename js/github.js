@@ -44,7 +44,7 @@ function updateGithubView(requestsData) {
         <div class="floatright">
           <a href="${item.html_url}" target="_blank">
             <span class="number">
-              <img src="/img/Octicons-mark-github.svg" />
+              <img src="/img/icon_128.png" />
             </span>
           </a>
         </div>
