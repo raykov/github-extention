@@ -7,6 +7,8 @@ function requestReviewRequests() {
   request.setRequestHeader("Authorization", `token ${backgrounds.githubConfigs.authToken}`);
 
   request.onload = function() {
+    setTimeout(requestReviewRequests, 60 * 1000);
+
     if (this.status < 200 || this.status >= 400) {
       return;
     }
