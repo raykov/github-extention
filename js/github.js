@@ -7,6 +7,8 @@ function requestReviewRequests() {
   request.setRequestHeader("Authorization", `token ${backgrounds.githubConfigs.authToken}`);
 
   request.onload = function() {
+    setTimeout(requestReviewRequests, backgrounds.githubConfigs.updateEvery * 1000);
+
     if (this.status < 200 || this.status >= 400) {
       return;
     }
@@ -19,14 +21,10 @@ function requestReviewRequests() {
   request.send();
 }
 
-function updateGithubView(requestsData) {
-  const github = document.getElementById("github");
-  let requests = [];
+function notificationTemplate(item) {
+  const repo = item.repository_url.substring(item.repository_url.lastIndexOf("/") + 1);
 
-  requestsData.items.forEach(item => {
-    const repo = item.repository_url.substring(item.repository_url.lastIndexOf("/") + 1);
-
-    let request = `
+  return `
 <li class="item">
     <div class="notify">
       <div class="header-wrapper">
@@ -50,10 +48,14 @@ function updateGithubView(requestsData) {
         </div>
       </div>
     </div>
-</li>`;
+</li>`
+}
 
-    requests.push(request)
-  });
+function updateGithubView(requestsData) {
+  const github = document.getElementById("github");
+  let requests = [];
+
+  requestsData.items.forEach(item => requests.push(notificationTemplate(item)));
 
   github.innerHTML = `<ul class="requests">${requests.join("")}</ul>`;
 }
