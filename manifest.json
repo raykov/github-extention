@@ -1,6 +1,6 @@
 {
   "name": "Github review requests list",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Github review requests list",
   "manifest_version": 2,
   "chrome_url_overrides": {
@@ -12,6 +12,10 @@
   },
   "permissions": [ "storage" ],
   "icons": {
+    "16": "img/icon_16.png",
+    "32": "img/icon_32.png",
+    "48": "img/icon_64.png",
+    "128": "img/icon_128.png"
   },
   "options_ui": {
     "page": "options.html",
