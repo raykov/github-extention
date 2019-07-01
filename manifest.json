@@ -10,7 +10,7 @@
     "scripts": ["js/onInstall.js"],
     "persistent": false
   },
-  "permissions": [ "storage" ],
+  "permissions": [ "storage", "notifications" ],
   "icons": {
     "16": "img/icon_16.png",
     "32": "img/icon_32.png",

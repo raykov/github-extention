@@ -23,6 +23,7 @@ function requestReviewRequests() {
 
 function notificationTemplate(item) {
   const repo = item.repository_url.substring(item.repository_url.lastIndexOf("/") + 1);
+  triggerNotification(item);
 
   return `
 <li class="item">
