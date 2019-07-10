@@ -1,3 +1,7 @@
+function triggerNotifications() {
+  backgrounds.requestsData.forEach(item => triggerNotification(item))
+}
+
 function triggerNotification(item) {
   if (!("Notification" in window)) {
     console.log("This browser does not support desktop notification");
@@ -35,4 +39,3 @@ function notification(item) {
     window.open(item.html_url, "_blank");
   };
 }
-
