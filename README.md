@@ -11,5 +11,4 @@
 * You would be asked about to setup github token and user name.
 * Go to https://github.com/settings/tokens and create a new token with "repo" access.
 * Save your token and username.
-* Open a new tab in your browser.
 * Enjoy.

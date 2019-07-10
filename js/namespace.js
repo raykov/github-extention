@@ -1,6 +1,7 @@
 window.backgrounds = {
   configs: {},
-  githubConfigs: {}
+  githubConfigs: {},
+  requestsData: []
 };
 
 function loadGithubConfigsFromStorage(callback = () => {}) {
