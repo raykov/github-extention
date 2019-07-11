@@ -7,7 +7,10 @@ function requestReviewRequests(callback = () => {}) {
   request.setRequestHeader("Authorization", `token ${backgrounds.githubConfigs.authToken}`);
 
   request.onload = function() {
-    setTimeout(requestReviewRequests, backgrounds.githubConfigs.updateEvery * 1000);
+    setTimeout(
+      () => { requestReviewRequests(callback) },
+      backgrounds.githubConfigs.updateEvery * 1000
+    );
 
     if (this.status < 200 || this.status >= 400) {
       return;
