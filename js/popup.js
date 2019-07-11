@@ -28,13 +28,38 @@ function notificationTemplate(item) {
 </li>`
 }
 
+function openAllPRsButton() {
+  return `
+<li>
+    <div class="all-prs-button" id="all-prs-button">
+      <div class="wrapper">
+        <span class="title">Open all PR's in new tabs</span>
+      </div>
+    </div>
+</li>
+  `
+}
+
+function openAllPRs() {
+  backgrounds.requestsData.forEach(item => chrome.tabs.create({ url: item.html_url }));
+}
+
 function updateGithubView() {
   const github = document.getElementById("github");
   let requests = [];
 
   backgrounds.requestsData.forEach(item => requests.push(notificationTemplate(item)));
 
-  github.innerHTML = `<ul class="requests">${requests.join("")}</ul>`;
+  github.innerHTML = `
+<ul class="requests">
+  ${backgrounds.requestsData.length > 1 ? openAllPRsButton() : ""}
+  ${requests.join("")}
+</ul>
+`;
+
+  if (backgrounds.requestsData.length > 1) {
+    document.getElementById("all-prs-button").addEventListener("click", openAllPRs);
+  }
 }
 
 loadGithubConfigsFromStorage(() => requestReviewRequests(() => {
