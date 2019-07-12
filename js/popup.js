@@ -48,17 +48,23 @@ function updateGithubView() {
   const github = document.getElementById("github");
   let requests = [];
 
-  backgrounds.requestsData.forEach(item => requests.push(notificationTemplate(item)));
+  if (backgrounds.requestsData.length === 0) {
+    github.innerHTML = `
+<div class="you-are-doing-well">@<b>${backgrounds.githubConfigs.username}</b> you are doing really well!</div>
+    `;
+  } else {
+    backgrounds.requestsData.forEach(item => requests.push(notificationTemplate(item)));
 
-  github.innerHTML = `
+    github.innerHTML = `
 <ul class="requests">
   ${backgrounds.requestsData.length > 1 ? openAllPRsButton() : ""}
   ${requests.join("")}
 </ul>
 `;
 
-  if (backgrounds.requestsData.length > 1) {
-    document.getElementById("all-prs-button").addEventListener("click", openAllPRs);
+    if (backgrounds.requestsData.length > 1) {
+      document.getElementById("all-prs-button").addEventListener("click", openAllPRs);
+    }
   }
 }
 
