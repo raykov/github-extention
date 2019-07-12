@@ -15,7 +15,17 @@ chrome.runtime.onInstalled.addListener(async details => {
 });
 
 if (chrome.alarms) {
-  //
+  chrome.alarms.create(backgrounds.alarms.UPDATE_BADGE, { periodInMinutes: 1 }) // one minute
+
+  chrome.alarms.onAlarm.addListener(alarm => {
+    switch(alarm.name) {
+      case backgrounds.alarms.UPDATE_BADGE:
+        callGH();
+        break;
+      default:
+        break;
+    }
+  })
 }
 
 if (chrome.gcm) {
@@ -62,7 +72,12 @@ async function setBadgeText() {
   chrome.browserAction.setBadgeBackgroundColor({ color: color });
 }
 
-loadGithubConfigsFromStorage(() => requestReviewRequests(() => {
-  setBadgeText();
-  triggerNotifications();
-}));
+function callGH() {
+  loadGithubConfigsFromStorage(() => requestReviewRequests(() => {
+    setBadgeText();
+    triggerNotifications();
+  }));
+}
+
+// Call it first time
+callGH();
