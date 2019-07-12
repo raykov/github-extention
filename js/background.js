@@ -47,6 +47,12 @@ if (chrome.notifications) {
   });
 }
 
+async function badgeLoading() {
+  chrome.browserAction.setBadgeText({ text: "O_O" });
+  chrome.browserAction.setTitle({ title: "Checking for new PR's" });
+  chrome.browserAction.setBadgeBackgroundColor({ color: [0,0,0, 255] });
+}
+
 async function setBadgeText() {
   let count = backgrounds.requestsData.length;
   let text;
@@ -73,6 +79,8 @@ async function setBadgeText() {
 }
 
 function callGH() {
+  badgeLoading();
+
   loadGithubConfigsFromStorage(() => requestReviewRequests(() => {
     setBadgeText();
     triggerNotifications();
