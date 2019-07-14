@@ -1,42 +1,6 @@
 html {
   background-color: #eeeeee;
 }
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), local('Roboto-Regular'), url("../fonts/roboto-regular.woff2") format('woff2');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto Light'), local('Roboto-Light'), url("../fonts/roboto-light.woff2") format('woff2');
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), local('Roboto-Medium'), url("../fonts/roboto-medium.woff2") format('woff2');
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Oswald';
-  src: local('Oswald Light'), local('Oswald-Light'), url("../fonts/oswald-light-webfont.woff") format('woff');
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Oswald';
-  src: local('Oswald Regular'), local('Oswald-Regular'), url("../fonts/oswald-regular-webfont.woff") format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Oswald';
-  src: local('Oswald Bold'), local('Oswald-Bold'), url("../fonts/oswald-bold-webfont.woff") format('woff');
-  font-weight: 500;
-  font-style: normal;
-}
 .copyrights {
   color: #aaa;
   position: fixed;
@@ -44,7 +8,7 @@ html {
   bottom: 0px;
   margin: 10px;
   text-align: right;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Arial', sans-serif;
 }
 .copyrights a {
   color: #999;
