@@ -14,7 +14,7 @@ function notificationTemplate(item) {
         </div>
         <div class="floatleft pdtop">
           <a href="${item.html_url}" target="_blank">${item.title}</a><BR>
-          <strong>${timeago().format(item.created_at)}</strong>
+          <strong>${timeAgo(item.created_at)}</strong>
         </div>
         <div class="floatright">
           <a href="${item.html_url}" target="_blank">
