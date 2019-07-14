@@ -9,14 +9,14 @@
   min-width: 450px;
   min-height: 125px;
 }
-.github .loading, .github .you-are-doing-well {
+.github .loading, .github .you-are-doing-well, .errors {
   padding: 30px 0px 0px 0px;
   width: 450px;
   font-size: 50px;
   display: block;
   text-align: center;
 }
-.github .you-are-doing-well {
+.github .you-are-doing-well, .errors {
   padding: 50px 0px 0px 0px;
   font-size: 20px;
 }
