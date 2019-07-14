@@ -68,6 +68,22 @@ function updateGithubView() {
   }
 }
 
+function updateGithubViewWithError(status) {
+  let error_message;
+
+  switch (status) {
+    case 422:
+      error_message = "Something went wrong. Please check your username and/or token.";
+      break;
+    default:
+      error_message = "Something went wrong.";
+      break;
+  }
+
+  const github = document.getElementById("github");
+  github.innerHTML = `<div class="errors">${error_message}</div>`;
+}
+
 loadGithubConfigsFromStorage(() => requestReviewRequests(() => {
   updateGithubView();
-}));
+}, updateGithubViewWithError));

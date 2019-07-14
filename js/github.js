@@ -1,4 +1,4 @@
-function requestReviewRequests(callback = () => {}) {
+function requestReviewRequests(callback = () => {}, onError = status => {}) {
   const baseUrl = "https://api.github.com/search/issues";
   const url = `${baseUrl}?q=is:pr+is:open+review-requested:${backgrounds.githubConfigs.username}`;
 
@@ -8,6 +8,7 @@ function requestReviewRequests(callback = () => {}) {
 
   request.onload = function() {
     if (this.status < 200 || this.status >= 400) {
+      onError(this.status);
       return;
     }
 

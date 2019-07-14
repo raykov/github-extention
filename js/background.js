@@ -53,6 +53,12 @@ async function badgeLoading() {
   chrome.browserAction.setBadgeBackgroundColor({ color: [0,0,0, 255] });
 }
 
+async function badgeError(status) {
+  chrome.browserAction.setBadgeText({ text: "Error" });
+  chrome.browserAction.setTitle({ title: "Something went wrong" });
+  chrome.browserAction.setBadgeBackgroundColor({ color: [255,0,0, 255] });
+}
+
 async function setBadgeText() {
   let count = backgrounds.requestsData.length;
   let text;
@@ -84,7 +90,7 @@ function callGH() {
   loadGithubConfigsFromStorage(() => requestReviewRequests(() => {
     setBadgeText();
     triggerNotifications();
-  }));
+  }, badgeError));
 }
 
 // Call it first time
