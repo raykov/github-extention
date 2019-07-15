@@ -84,6 +84,9 @@ function updateGithubViewWithError(status) {
   github.innerHTML = `<div class="errors">${error_message}</div>`;
 }
 
+badgeLoading();
+
 loadGithubConfigsFromStorage(() => requestReviewRequests(() => {
   updateGithubView();
+  setBadgeText();
 }, updateGithubViewWithError));
