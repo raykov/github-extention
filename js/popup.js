@@ -19,7 +19,7 @@ function notificationTemplate(item) {
         <div class="floatright">
           <a href="${item.html_url}" target="_blank">
             <span class="number">
-              <img src="/img/icon_128.png" />
+              <img src="/img/pull-request-icon_128.png" />
             </span>
           </a>
         </div>
