@@ -17,7 +17,53 @@
           <input type="password" id="token">
         </label>
       </p>
-      <p><label><span>Your github username: </span><input type="text" id="username"></label></p>
+      <p><label><span>Your github username: </span><input type="text" id="review-requested"></label></p>
+
+      <p><a href="#" id="advanced-options-link">Advanced options</a></p>
+      <div id="advanced-options" style="display:none;">
+        <p>
+          <label>
+            <span>What are you looking for: </span>
+            <select id="is">
+              <option value="pr" selected="selected">Pull Request</option>
+              <option value="issue">Issue</option>
+            </select>
+          </label>
+        </p>
+        <p>
+          <label>
+            <span>In the state: </span>
+            <select id="state">
+              <option value="open" selected="selected">Open</option>
+              <option value="closed">Closed</option>
+            </select>
+          </label>
+        </p>
+        <p>
+          <label>
+            <span>From these owners: </span>
+            <input type="text" id="user">
+          </label>
+        </p>
+        <p>
+          <label>
+            <span>In these repositories: </span>
+            <input type="text" id="repo">
+          </label>
+        </p>
+        <p>
+          <label>
+            <span>Opened by the author: </span>
+            <input type="text" id="author">
+          </label>
+        </p>
+        <p>
+          <label>
+            <span>Mentioning the users: </span>
+            <input type="text" id="mentions">
+          </label>
+        </p>
+      </div>
       <div id="status">&nbsp;</div>
       <button id="save">Save</button>
     </div>
