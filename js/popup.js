@@ -1,25 +1,23 @@
-function notificationTemplate(item) {
-  const repo = item.repository_url.substring(item.repository_url.lastIndexOf("/") + 1);
-
+function notificationTemplate(pullRequest) {
   return `
 <li class="item">
     <div class="notify">
       <div class="header-wrapper">
-        <span class="title">${repo}</span>
-        <span class="notifications">${item.user.login}</span>
+        <span class="title">${pullRequest.repo}</span>
+        <span class="notifications">${pullRequest.userLogin}</span>
       </div>
       <div class="content-wrapper">
         <div class="floatleft floatleft-0-padding">
-          <img src="${item.user.avatar_url}" />
+          <img src="${pullRequest.userAvatarUrl}" />
         </div>
         <div class="floatleft pdtop">
-          <a href="${item.html_url}" target="_blank">${item.title}</a><BR>
-          <strong>${timeAgo(item.created_at)}</strong>
+          <a href="${pullRequest.htmlUrl}" target="_blank">${pullRequest.title}</a><BR>
+          <strong>${timeAgo(pullRequest.createdAt)}</strong>
         </div>
         <div class="floatright">
-          <a href="${item.html_url}" target="_blank">
+          <a href="${pullRequest.htmlUrl}" target="_blank">
             <span class="number">
-              <img src="/img/pull-request-icon_128.png" />
+              <img src="${ pullRequest.provider === "azure" ? "/img/azure-git.png" : "/img/icon_128.png" }" />
             </span>
           </a>
         </div>
@@ -41,14 +39,14 @@ function openAllPRsButton() {
 }
 
 function openAllPRs() {
-  backgrounds.requestsData.forEach(item => chrome.tabs.create({ url: item.html_url }));
+  backgrounds.requestsData.forEach(item => chrome.tabs.create({ url: item.htmlUrl }));
 }
 
 function updateGithubView() {
   const github = document.getElementById("github");
   let requests = [];
 
-  if (backgrounds.requestsData.length === 0) {
+  if (backgrounds.requestsData.length() === 0) {
     github.innerHTML = `
 <div class="you-are-doing-well">@<b>${backgrounds.githubConfigs.username}</b> you are doing really well!</div>
     `;
@@ -57,12 +55,12 @@ function updateGithubView() {
 
     github.innerHTML = `
 <ul class="requests">
-  ${backgrounds.requestsData.length > 1 ? openAllPRsButton() : ""}
+  ${backgrounds.requestsData.length() > 1 ? openAllPRsButton() : ""}
   ${requests.join("")}
 </ul>
 `;
 
-    if (backgrounds.requestsData.length > 1) {
+    if (backgrounds.requestsData.length() > 1) {
       document.getElementById("all-prs-button").addEventListener("click", openAllPRs);
     }
   }
@@ -86,7 +84,7 @@ function updateGithubViewWithError(status) {
 
 badgeLoading();
 
-loadGithubConfigsFromStorage(() => requestReviewRequests(() => {
+loadConfigsFromStorage(() => requestReviewRequests(() => {
   updateGithubView();
   setBadgeText();
 }, updateGithubViewWithError));

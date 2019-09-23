@@ -1,4 +1,4 @@
-function requestReviewRequests(callback = () => {}, onError = status => {}) {
+function requestReviewRequestsGithub(callback = () => {}, onError = status => {}) {
   const baseUrl = "https://api.github.com/search/issues";
   const url = `${baseUrl}?q=${requestParams()}`;
 
@@ -14,7 +14,8 @@ function requestReviewRequests(callback = () => {}, onError = status => {}) {
 
     const body = JSON.parse(this.response);
 
-    backgrounds.requestsData = body.items;
+    backgrounds.requestsData.github = body.items.map(item => (prepareGitHubItem(item)));
+
     callback();
   };
 
@@ -34,4 +35,18 @@ function requestParams(){
   if (backgrounds.githubConfigs.mentions !== "") data.push(`mentions:${backgrounds.githubConfigs.mentions}`);
 
   return data.join("+")
+}
+
+function prepareGitHubItem(item) {
+  return {
+    id: item.id,
+    nodeId: item.node_id,
+    repo: item.repository_url.substring(item.repository_url.lastIndexOf("/") + 1),
+    userLogin: item.user.login,
+    userAvatarUrl: item.user.avatar_url,
+    htmlUrl: item.html_url,
+    title: item.title,
+    createdAt: item.created_at,
+    provider: "github"
+  }
 }

@@ -17,10 +17,9 @@ function triggerNotification(item) {
 }
 
 function notification(item) {
-  const repo = item.repository_url.substring(item.repository_url.lastIndexOf("/") + 1);
-  const title = `${repo} :: ${item.user.login}`;
+  const title = `${item.repo} :: ${item.userLogin}`;
   const body = `${item.title}`;
-  const tag = `${item.id}-${item.node_id}-github-notification`;
+  const tag = `${item.id}-${item.nodeId}-github-notification`;
 
   let notification = new Notification(
     title,
@@ -29,13 +28,13 @@ function notification(item) {
       badge: "/img/icon_128.png",
       body: body,
       tag: tag,
-      icon: item.user.avatar_url,
+      icon: item.userAvatarUrl,
       image: "/img/icon_128.png",
     }
   );
 
   notification.onclick = event => {
     event.preventDefault();
-    window.open(item.html_url, "_blank");
+    window.open(item.htmlUrl, "_blank");
   };
 }

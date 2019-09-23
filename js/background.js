@@ -20,7 +20,7 @@ if (chrome.alarms) {
   chrome.alarms.onAlarm.addListener(alarm => {
     switch(alarm.name) {
       case backgrounds.alarms.UPDATE_BADGE:
-        callGH();
+        callProviders();
         break;
       default:
         break;
@@ -47,14 +47,14 @@ if (chrome.notifications) {
   });
 }
 
-function callGH() {
+function callProviders() {
   badgeLoading();
 
-  loadGithubConfigsFromStorage(() => requestReviewRequests(() => {
+  loadConfigsFromStorage(() => requestReviewRequests(() => {
     setBadgeText();
     triggerNotifications();
   }, badgeError));
 }
 
 // Call it first time
-callGH();
+callProviders();

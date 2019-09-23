@@ -11,7 +11,7 @@ async function badgeError(status) {
 }
 
 async function setBadgeText() {
-  let count = backgrounds.requestsData.length;
+  let count = backgrounds.requestsData.length();
   let text;
   let color;
 
