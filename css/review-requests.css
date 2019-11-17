@@ -3,48 +3,48 @@
   padding: 0px;
 }
 
-.github {
+.review-requests {
   color: #777777;
   font-family: 'Arial', sans-serif;
   min-width: 450px;
   min-height: 125px;
 }
-.github .loading, .github .you-are-doing-well, .errors {
+.review-requests .loading, .review-requests .you-are-doing-well, .errors {
   padding: 30px 0px 0px 0px;
   width: 450px;
   font-size: 50px;
   display: block;
   text-align: center;
 }
-.github .you-are-doing-well, .errors {
+.review-requests .you-are-doing-well, .errors {
   padding: 50px 0px 0px 0px;
   font-size: 20px;
 }
-.github a {
+.review-requests a {
   color: #333333;
 }
-.github a:hover {
+.review-requests a:hover {
     color: #666666;
 }
-.github ul.requests {
+.review-requests ul.requests {
   list-style-type: none;
 }
-.github ul.requests .avatar {
+.review-requests ul.requests .avatar {
   display: inline-block;
   width: 105px;
   height: 100px;
 }
-.github ul.requests .avatar img {
+.review-requests ul.requests .avatar img {
   width: 100px;
   height: 100px;
 }
-.github ul.requests .author {
+.review-requests ul.requests .author {
   font-weight: bold;
 }
-.github ul.requests .author-repo {
+.review-requests ul.requests .author-repo {
   margin-bottom: 10px;
 }
-.github ul.requests .info {
+.review-requests ul.requests .info {
   width: 190px;
   max-height: 100px;
   height: 100px;
@@ -52,7 +52,7 @@
   overflow: hidden;
 }
 
-.github ul.requests li.item {
+.review-requests ul.requests li.item {
   width: 300px;
   dispaly: inline-block;
   float: left;
@@ -61,7 +61,7 @@
   border-radius: 5px;
   background-color: #dddddd;
 }
-.github ul.requests li.item .pr {
+.review-requests ul.requests li.item .pr {
   font-size: 20px;
   text-align: right;
 }
@@ -277,7 +277,7 @@ div.notify .content-wrapper .number
   max-width: 270px;
 }
 
-.github ul.requests li.item {
+.review-requests ul.requests li.item {
   width: auto;
   dispaly: inline-block;
   float: left;

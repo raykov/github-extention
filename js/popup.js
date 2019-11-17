@@ -42,18 +42,18 @@ function openAllPRs() {
   backgrounds.requestsData.forEach(item => chrome.tabs.create({ url: item.htmlUrl }));
 }
 
-function updateGithubView() {
-  const github = document.getElementById("github");
+function updateReviewRequestsView() {
+  const reviewRequests = document.getElementById("review-requests");
   let requests = [];
 
   if (backgrounds.requestsData.length() === 0) {
-    github.innerHTML = `
+    reviewRequests.innerHTML = `
 <div class="you-are-doing-well">@<b>${backgrounds.githubConfigs.username}</b> you are doing really well!</div>
     `;
   } else {
     backgrounds.requestsData.forEach(item => requests.push(notificationTemplate(item)));
 
-    github.innerHTML = `
+    reviewRequests.innerHTML = `
 <ul class="requests">
   ${backgrounds.requestsData.length() > 1 ? openAllPRsButton() : ""}
   ${requests.join("")}
@@ -66,7 +66,7 @@ function updateGithubView() {
   }
 }
 
-function updateGithubViewWithError(status) {
+function updateReviewRequestsViewWithError(status) {
   let error_message;
 
   switch (status) {
@@ -78,13 +78,13 @@ function updateGithubViewWithError(status) {
       break;
   }
 
-  const github = document.getElementById("github");
-  github.innerHTML = `<div class="errors">${error_message}</div>`;
+  const reviewRequests = document.getElementById("review-requests");
+  reviewRequests.innerHTML = `<div class="errors">${error_message}</div>`;
 }
 
 badgeLoading();
 
 loadConfigsFromStorage(() => requestReviewRequests(() => {
-  updateGithubView();
+  updateReviewRequestsView();
   setBadgeText();
-}, updateGithubViewWithError));
+}, updateReviewRequestsViewWithError));
