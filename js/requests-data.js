@@ -2,16 +2,17 @@ class RequestsData {
   constructor() {
     this.providers = {};
     this.loading = {};
+    this.badge = new Badge();
   }
 
   items() {
     let items = [];
 
     Object.keys(this.providers).forEach(key => {
-      items.concat(this.providers[key])
+      items.concat(this.providers[key]);
     });
 
-    return items
+    return items;
   }
 
   length() {
@@ -19,12 +20,14 @@ class RequestsData {
   }
 
   forEach(callback) {
-    return this.items().forEach(callback)
+    return this.items().forEach(callback);
   }
 
   setProviderData(provider, data) {
     this.setProviderLoaded(provider);
-    this.providers[provider] = data
+    this.providers[provider] = data;
+
+    this._updateBadge();
   }
 
   isLoading() {
@@ -32,10 +35,17 @@ class RequestsData {
   }
 
   setProviderLoading(provider) {
-    this.loading[provider] = true
+    this.badge.loading();
+    this.loading[provider] = true;
   }
 
   setProviderLoaded(provider) {
-    delete this.loading[provider]
+    delete this.loading[provider];
+  }
+
+  _updateBadge() {
+    if (this.isLoading()) return;
+
+    this.badge.requests(this.length())
   }
 }

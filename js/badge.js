@@ -1,36 +1,64 @@
-async function badgeLoading() {
-  chrome.browserAction.setBadgeText({ text: "O_O" });
-  chrome.browserAction.setTitle({ title: "Checking for new PR's" });
-  chrome.browserAction.setBadgeBackgroundColor({ color: [0,0,0, 255] });
-}
+class Badge {
+  constructor() {
+    if (!!Badge.instance) {
+      return Badge.instance;
+    }
 
-async function badgeError(status) {
-  chrome.browserAction.setBadgeText({ text: "Error" });
-  chrome.browserAction.setTitle({ title: "Something went wrong" });
-  chrome.browserAction.setBadgeBackgroundColor({ color: [255,0,0, 255] });
-}
+    Badge.instance = this;
 
-async function setBadgeText() {
-  let count = backgrounds.requestsData.length();
-  let text;
-  let color;
-
-  switch(count) {
-    case 0:
-      text = "No new code review requests";
-      color = [0,0,0, 255];
-      break;
-    case 1:
-      text = "One new code review request";
-      color = [255,0,0, 255];
-      break;
-    default:
-      text = `${count} new code review requests`;
-      color = [255,0,0, 255];
-      break;
+    return this;
   }
 
-  chrome.browserAction.setBadgeText({ text: count > 0 ? `${count}` : "" });
-  chrome.browserAction.setTitle({ title: text });
-  chrome.browserAction.setBadgeBackgroundColor({ color: color });
+  loading() {
+    this.set(
+      "O_O",
+      "Checking for new PR's",
+      this.colors.black
+    )
+  }
+
+  error(status) {
+    this.set(
+      "Error",
+      `Something went wrong: ${status}`,
+      this.colors.red
+    )
+  }
+
+  requests(count) {
+    let title;
+    let color;
+
+    switch(count) {
+      case 0:
+        title = "No new code review requests";
+        color = this.colors.black;
+        break;
+      case 1:
+        title = "One new code review request";
+        color = this.colors.red;
+        break;
+      default:
+        title = `${count} new code review requests`;
+        color = this.colors.red;
+        break;
+    }
+
+    this.set(
+      count > 0 ? `${count}` : "",
+      title,
+      color
+    )
+  }
+
+  async set(text, title, color) {
+    chrome.browserAction.setBadgeText({ text: text });
+    chrome.browserAction.setTitle({ title: title });
+    chrome.browserAction.setBadgeBackgroundColor({ color: color });
+  }
+
+  colors = {
+    red: [255,0,0, 255],
+    black: [0,0,0, 255]
+  }
 }

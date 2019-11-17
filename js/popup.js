@@ -82,9 +82,6 @@ function updateReviewRequestsViewWithError(status) {
   reviewRequests.innerHTML = `<div class="errors">${error_message}</div>`;
 }
 
-badgeLoading();
-
 loadConfigsFromStorage(() => requestReviewRequests(() => {
   updateReviewRequestsView();
-  setBadgeText();
 }, updateReviewRequestsViewWithError));
