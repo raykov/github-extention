@@ -48,9 +48,7 @@ if (chrome.notifications) {
 }
 
 function callProviders() {
-  loadConfigsFromStorage(() => requestReviewRequests(() => {
-    triggerNotifications();
-  }, new Badge().error)); // Maybe call Badge directly from provider
+  loadConfigsFromStorage(() => requestReviewRequests(() => {}, new Badge().error)); // Maybe call Badge directly from provider
 }
 
 // Call it first time

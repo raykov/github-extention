@@ -3,6 +3,7 @@ class RequestsData {
     this.providers = {};
     this.loading = {};
     this.badge = new Badge();
+    this.notifications = new Notifications();
   }
 
   items() {
@@ -28,6 +29,7 @@ class RequestsData {
     this.providers[provider] = data;
 
     this._updateBadge();
+    this._notifications();
   }
 
   isLoading() {
@@ -46,6 +48,12 @@ class RequestsData {
   _updateBadge() {
     if (this.isLoading()) return;
 
-    this.badge.requests(this.length())
+    this.badge.requests(this.length());
+  }
+
+  _notifications() {
+    if (this.isLoading()) return;
+
+    this.notifications.show(this.items());
   }
 }
