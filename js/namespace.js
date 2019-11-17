@@ -1,22 +1,3 @@
-class RequestsData {
-  constructor() {
-    this.github = [];
-    this.azure = [];
-  }
-
-  items() {
-    return this.github.concat(this.azure);
-  }
-
-  length(){
-    return this.items().length;
-  }
-
-  forEach(callback) {
-    return this.items().forEach(callback)
-  }
-}
-
 window.backgrounds = {
   configs: {},
   githubConfigs: {},

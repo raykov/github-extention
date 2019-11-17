@@ -5,7 +5,7 @@
   "manifest_version": 2,
   "background": {
     "persistent": false,
-    "scripts": ["js/namespace.js", "js/notifications.js", "js/github.js", "js/azure.js", "js/badge.js", "js/background.js"]
+    "scripts": ["js/requests-data.js", "js/namespace.js", "js/notifications.js", "js/github.js", "js/azure.js", "js/badge.js", "js/background.js"]
   },
   "permissions": [ "storage", "notifications", "alarms", "activeTab", "idle", "contextMenus"  ],
   "icons": {
