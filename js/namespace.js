@@ -18,6 +18,6 @@ function loadConfigsFromStorage(callback = () => {}) {
 }
 
 function requestReviewRequests(callback = () => {}, onError = status => {}) {
-  requestReviewRequestsGithub(callback, onError);
-  requestReviewRequestsAzure(callback, onError);
+  new Github(backgrounds.githubConfigs).request(callback, onError)
+  new Azure(backgrounds.azureConfigs).request(callback, onError)
 }
