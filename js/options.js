@@ -4,7 +4,7 @@ saveOptions = () => {
       github: fieldsToData("github"),
       azure: fieldsToData("azure")
     }
-  })
+  });
   chrome.storage.local.set(
     {
       configs: {
@@ -63,7 +63,7 @@ restoreOptions = () => {
   loadConfigsFromStorage(() => {
     ["github", "azure"].forEach(provider => {
       FIELDS[provider].forEach(field => {
-        console.log(fieldValue(field, provider))
+        console.log(fieldValue(field, provider));
         document.getElementById(`${provider}-${field}`).value = fieldValue(field, provider);
       })
     });

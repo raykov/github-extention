@@ -7,9 +7,9 @@ async function firstInstall() {
 }
 
 chrome.runtime.onInstalled.addListener(async details => {
-  if (details.reason == "install" ) {
+  if (details.reason === "install" ) {
     firstInstall();
-  } else if (details.reason == "update") {
+  } else if (details.reason === "update") {
 
   }
 });
