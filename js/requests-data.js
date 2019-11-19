@@ -10,7 +10,7 @@ class RequestsData {
     let items = [];
 
     Object.keys(this.providers).forEach(key => {
-      items.concat(this.providers[key]);
+      items = items.concat(this.providers[key]);
     });
 
     return items;
