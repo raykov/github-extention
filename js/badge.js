@@ -45,7 +45,7 @@ class Badge {
     }
 
     this.set(
-      count > 0 ? `${count}` : "",
+      count > 0 ? `${count}` : `${new Date().getMinutes()}${new Date().getSeconds()}`,
       title,
       color
     )
