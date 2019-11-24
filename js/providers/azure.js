@@ -68,12 +68,3 @@ class Azure {
     }
   }
 }
-
-
-function sleep(millis)
-{
-  let date = new Date();
-  let curDate = null;
-  do { curDate = new Date(); }
-  while(curDate-date < millis);
-}

@@ -15,7 +15,7 @@ chrome.runtime.onInstalled.addListener(async details => {
 });
 
 if (chrome.alarms) {
-  chrome.alarms.create(backgrounds.alarms.UPDATE_BADGE, { periodInMinutes: 1 }) // one minute
+  chrome.alarms.create(backgrounds.alarms.UPDATE_BADGE, { periodInMinutes: 1 }); // one minute
 
   chrome.alarms.onAlarm.addListener(alarm => {
     switch(alarm.name) {
