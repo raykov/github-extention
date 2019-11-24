@@ -10,13 +10,12 @@ class Azure {
     this.url = `${this.baseUrl}?api-version=5.1&searchCriteria.status=all`;
   }
 
-  request(callback = () => {}, onError = status => {}) {
+  request() {
     let self = this;
 
-    backgrounds.requestsData.setProviderLoading(self.name);
+    window.requestsData.setProviderLoading(self.name);
 
     if (self.configuration.token === "" || self.configuration.token === null || self.configuration.token === undefined) {
-      callback();
       return
     }
 
@@ -26,7 +25,12 @@ class Azure {
 
     request.onload = function() {
       if (this.status < 200 || this.status >= 400) {
-        onError(this.status);
+        window.requestsData.setProviderError(self.name, { message: "Something went wrong", status: this.status, details: "" });
+        return;
+      }
+
+      if (this.status === 203) {
+        window.requestsData.setProviderError(self.name, { message: "Authorization error", status: this.status, details: "Please check your username and/or token" });
         return;
       }
 
@@ -34,9 +38,7 @@ class Azure {
 
       const toReview = body["value"].filter(pr => (pr["reviewers"].filter(reviewer => (reviewer["uniqueName"] === self.configuration.user)).length > 0));
 
-      backgrounds.requestsData.setProviderData(self.name, toReview.map(pr => (self._prepareData(pr))));
-
-      callback();
+      window.requestsData.setProviderData(self.name, toReview.map(pr => (self._prepareData(pr))));
     };
 
     request.send();

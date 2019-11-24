@@ -10,10 +10,10 @@ class Github {
     this.url = `${this.baseUrl}?q=${this._requestParams()}`;
   }
 
-  request(callback = () => {}, onError = status => {}) {
+  request() {
     let self = this;
 
-    backgrounds.requestsData.setProviderLoading(self.name);
+    window.requestsData.setProviderLoading(self.name);
 
     const request = new XMLHttpRequest();
     request.open('GET', self.url, true);
@@ -21,15 +21,14 @@ class Github {
 
     request.onload = function() {
       if (this.status < 200 || this.status >= 400) {
-        onError(this.status);
+        const errorBody = JSON.parse(this.response);
+        window.requestsData.setProviderError(self.name, { message: errorBody.message, status: this.status, details: errorBody.errors[0].message });
         return;
       }
 
       const body = JSON.parse(this.response);
 
-      backgrounds.requestsData.setProviderData(self.name, body.items.map(item => (self._prepareData(item))));
-
-      callback();
+      window.requestsData.setProviderData(self.name, body.items.map(item => (self._prepareData(item))));
     };
 
     request.send();

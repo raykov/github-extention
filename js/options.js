@@ -17,7 +17,7 @@ saveOptions = () => {
       status.innerHTML = "Options saved";
 
       setTimeout(() => status.innerHTML = "&nbsp;", 750);
-      loadConfigsFromStorage();
+      new Storage().load();
     });
 };
 
@@ -60,7 +60,7 @@ function defaultFieldValue(field, provider) {
 }
 
 restoreOptions = () => {
-  loadConfigsFromStorage(() => {
+  new Storage().load(() => {
     ["github", "azure"].forEach(provider => {
       FIELDS[provider].forEach(field => {
         console.log(fieldValue(field, provider));

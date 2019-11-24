@@ -48,7 +48,10 @@ if (chrome.notifications) {
 }
 
 function callProviders() {
-  loadConfigsFromStorage(() => requestReviewRequests(() => {}, new Badge().error)); // Maybe call Badge directly from provider
+  new Storage().load(() => {
+    new Github(backgrounds.githubConfigs).request();
+    new Azure(backgrounds.azureConfigs).request();
+  });
 }
 
 // Call it first time

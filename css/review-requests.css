@@ -20,6 +20,9 @@
   padding: 50px 0px 0px 0px;
   font-size: 20px;
 }
+.review-requests .errors {
+  padding: 20px;
+}
 .review-requests a {
   color: #333333;
 }

@@ -17,15 +17,15 @@ class Badge {
     )
   }
 
-  error(status) {
+  error(errors) {
     this.set(
       "Error",
-      `Something went wrong: ${status}`,
+      errors.join("\n"),
       this.colors.red
     )
   }
 
-  requests(count) {
+  show(count) {
     let title;
     let color;
 
