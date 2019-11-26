@@ -78,7 +78,7 @@ class Popup {
 
       return `
 <ul class="requests">
-  ${items > 1 ? this._topButton() : ""}
+  ${items.length > 1 ? this._topButton() : ""}
   ${requests.join("")}
 </ul>
 `;
