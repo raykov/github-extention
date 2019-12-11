@@ -36,7 +36,14 @@ class Azure {
 
       const body = JSON.parse(this.response);
 
-      const toReview = body["value"].filter(pr => (pr["reviewers"].filter(reviewer => (reviewer["uniqueName"] === self.configuration.user)).length > 0));
+      const toReview = body["value"].filter(pr => {
+        return pr["status"] === "active" &&
+               pr["reviewers"].filter(reviewer => {
+                 // could be -10, -5, 0, 5, 10
+                 return reviewer["vote"] === 0 &&
+                        reviewer["uniqueName"] === self.configuration.user
+               }).length > 0
+      });
 
       window.requestsData.setProviderData(self.name, toReview.map(pr => (self._prepareData(pr))));
     };
