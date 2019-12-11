@@ -1,13 +1,29 @@
 {
   "name": "Github review requests list",
-  "version": "0.0.21",
+  "version": "0.1.0",
   "description": "Github review requests list",
   "manifest_version": 2,
   "background": {
     "persistent": false,
-    "scripts": ["js/namespace.js", "js/notifications.js", "js/github.js", "js/badge.js", "js/background.js"]
+    "scripts": [
+      "js/namespace.js",
+      "js/storage.js",
+      "js/badge.js",
+      "js/notifications.js",
+      "js/requests-data.js",
+      "js/providers/github.js",
+      "js/providers/azure.js",
+      "js/background.js"
+    ]
   },
-  "permissions": [ "storage", "notifications", "alarms", "activeTab", "idle", "contextMenus"  ],
+  "permissions": [
+    "storage",
+    "notifications",
+    "alarms",
+    "activeTab",
+    "idle",
+    "contextMenus"
+  ],
   "icons": {
     "16": "img/pull-request-icon_16.png",
     "32": "img/pull-request-icon_32.png",

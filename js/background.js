@@ -7,20 +7,20 @@ async function firstInstall() {
 }
 
 chrome.runtime.onInstalled.addListener(async details => {
-  if (details.reason == "install" ) {
+  if (details.reason === "install" ) {
     firstInstall();
-  } else if (details.reason == "update") {
+  } else if (details.reason === "update") {
 
   }
 });
 
 if (chrome.alarms) {
-  chrome.alarms.create(backgrounds.alarms.UPDATE_BADGE, { periodInMinutes: 1 }) // one minute
+  chrome.alarms.create(backgrounds.alarms.UPDATE_BADGE, { periodInMinutes: 1 }); // one minute
 
   chrome.alarms.onAlarm.addListener(alarm => {
     switch(alarm.name) {
       case backgrounds.alarms.UPDATE_BADGE:
-        callGH();
+        callProviders();
         break;
       default:
         break;
@@ -47,14 +47,12 @@ if (chrome.notifications) {
   });
 }
 
-function callGH() {
-  badgeLoading();
-
-  loadGithubConfigsFromStorage(() => requestReviewRequests(() => {
-    setBadgeText();
-    triggerNotifications();
-  }, badgeError));
+function callProviders() {
+  new Storage().load(() => {
+    new Github(backgrounds.githubConfigs).request();
+    new Azure(backgrounds.azureConfigs).request();
+  });
 }
 
 // Call it first time
-callGH();
+callProviders();

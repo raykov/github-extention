@@ -1,47 +1,71 @@
 saveOptions = () => {
+  console.log({
+    configs: {
+      github: fieldsToData("github"),
+      azure: fieldsToData("azure")
+    }
+  });
   chrome.storage.local.set(
-    { githubConfigs: fieldsToData() },
+    {
+      configs: {
+        github: fieldsToData("github"),
+        azure: fieldsToData("azure")
+      }
+    },
     () => {
       const status = document.getElementById("status");
       status.innerHTML = "Options saved";
 
       setTimeout(() => status.innerHTML = "&nbsp;", 750);
-      loadGithubConfigsFromStorage();
+      new Storage().load();
     });
 };
 
-const FIELDS = ["review-requested", "is", "state", "user", "repo", "author", "mentions", "token"];
+const FIELDS = {
+  github: ["review-requested", "is", "state", "user", "repo", "author", "mentions", "token"],
+  azure: ["user", "token", "workspace"]
+};
+
 const FIELDS_MAPPING = {
-  "token": "authToken",
-  "review-requested": "username"
+  github: {
+    "token": "authToken",
+    "review-requested": "username"
+  },
+  azure: {}
 };
 const FIELD_DEFAULTS = {
-  "is": "pr",
-  "state": "open"
+  github: {
+    "is": "pr",
+    "state": "open"
+  },
+  azure: {}
 };
 
-function fieldsToData() {
+function fieldsToData(provider) {
   let data = {};
 
-  FIELDS.forEach(field => {
-    data[FIELDS_MAPPING[field] || field] = document.getElementById(field).value
+  FIELDS[provider].forEach(field => {
+    data[FIELDS_MAPPING[provider][field] || field] = document.getElementById(`${provider}-${field}`).value
   });
 
   return data
 }
 
-function fieldValue(field) {
-  return backgrounds.githubConfigs[FIELDS_MAPPING[field] || field] || defaultFieldValue(field);
+function fieldValue(field, provider) {
+  return backgrounds[provider === "github" ? "githubConfigs": "azureConfigs"][FIELDS_MAPPING[provider][field] || field] || defaultFieldValue(field, provider);
 }
 
-function defaultFieldValue(field) {
-  return FIELD_DEFAULTS[field] || ""
+function defaultFieldValue(field, provider) {
+  return FIELD_DEFAULTS[provider][field] || ""
 }
 
 restoreOptions = () => {
-  loadGithubConfigsFromStorage(() => {
-    FIELDS.forEach(field => {
-      document.getElementById(field).value = fieldValue(field);
+  new Storage().load(() => {
+    ["github", "azure"].forEach(provider => {
+      FIELDS[provider].forEach(field => {
+        console.log(fieldValue(field, provider));
+        document.getElementById(`${provider}-${field}`).value = fieldValue(field, provider);
+      })
     });
   });
 };

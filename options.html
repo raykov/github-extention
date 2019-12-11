@@ -14,17 +14,17 @@
       <p>
         <label>
           <span>Your <a href="https://github.com/settings/tokens" target="_blank">github token</a>: </span>
-          <input type="password" id="token">
+          <input type="password" id="github-token">
         </label>
       </p>
-      <p><label><span>Your github username: </span><input type="text" id="review-requested"></label></p>
+      <p><label><span>Your github username: </span><input type="text" id="github-review-requested"></label></p>
 
       <p><a href="#" id="advanced-options-link">Advanced options</a></p>
       <div id="advanced-options" style="display:none;">
         <p>
           <label>
             <span>What are you looking for: </span>
-            <select id="is">
+            <select id="github-is">
               <option value="pr" selected="selected">Pull Request</option>
               <option value="issue">Issue</option>
             </select>
@@ -33,7 +33,7 @@
         <p>
           <label>
             <span>In the state: </span>
-            <select id="state">
+            <select id="github-state">
               <option value="open" selected="selected">Open</option>
               <option value="closed">Closed</option>
             </select>
@@ -42,33 +42,46 @@
         <p>
           <label>
             <span>From these owners: </span>
-            <input type="text" id="user">
+            <input type="text" id="github-user">
           </label>
         </p>
         <p>
           <label>
             <span>In these repositories: </span>
-            <input type="text" id="repo">
+            <input type="text" id="github-repo">
           </label>
         </p>
         <p>
           <label>
             <span>Opened by the author: </span>
-            <input type="text" id="author">
+            <input type="text" id="github-author">
           </label>
         </p>
         <p>
           <label>
             <span>Mentioning the users: </span>
-            <input type="text" id="mentions">
+            <input type="text" id="github-mentions">
           </label>
         </p>
       </div>
+      <hr />
+      <p>
+        <label>
+          <span>Your <a href="https://dev.azure.com/" target="_blank">Azure Personal Access Tokens</a>: </span>
+          <input type="password" id="azure-token">
+        </label>
+      </p>
+      <p><label><span>Your Azure user: </span><input type="text" id="azure-user"></label></p>
+      <p><label><span>Your Azure Organization: </span><input type="text" id="azure-workspace"></label></p>
       <div id="status">&nbsp;</div>
       <button id="save">Save</button>
     </div>
 
     <script src="js/namespace.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/badge.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/requests-data.js"></script>
     <script src="js/options.js"></script>
   </body>
 </html>
