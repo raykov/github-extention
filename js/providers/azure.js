@@ -13,6 +13,10 @@ class Azure {
   request() {
     let self = this;
 
+    if (!self.isEnabled()) {
+      return
+    }
+
     window.requestsData.setProviderLoading(self.name);
 
     if (self.configuration.token === "" || self.configuration.token === null || self.configuration.token === undefined) {
@@ -59,6 +63,18 @@ class Azure {
     }
 
     request.send();
+  }
+
+  isEnabled() {
+    return !this._misconfigured()
+  }
+
+  _misconfigured() {
+    let conf = this.configuration;
+
+    return conf.user === undefined || conf.user === null || conf.user === "" ||
+      conf.token === undefined || conf.token === null || conf.token === "" ||
+      conf.workspace === undefined || conf.workspace === null || conf.workspace === ""
   }
 
   _authorization() {

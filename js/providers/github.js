@@ -13,6 +13,10 @@ class Github {
   request() {
     let self = this;
 
+    if (!self.isEnabled()) {
+      return
+    }
+
     window.requestsData.setProviderLoading(self.name);
 
     const request = new XMLHttpRequest();
@@ -42,6 +46,17 @@ class Github {
     }
 
     request.send();
+  }
+
+  isEnabled() {
+    return !this._misconfigured()
+  }
+
+  _misconfigured() {
+    let conf = this.configuration;
+
+    return conf.username === undefined || conf.username === null || conf.username === "" ||
+      conf.authToken === undefined || conf.authToken === null || conf.authToken === ""
   }
 
   _authorization() {
