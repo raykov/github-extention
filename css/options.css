@@ -1,13 +1,76 @@
-.form {
-  color: #777777;
-  font-family: 'Arial', sans-serif;
-}
-
-.form label span {
-  width: 400px;
+.tabbed figure {
   display: block;
+  margin-left: 0;
+  border-bottom: 1px solid silver;
+  clear: both;
 }
 
-.form label input {
-  width: 400px;
+.tabbed > input,
+.tabbed figure > div { display: none; }
+
+.tabbed figure>div {
+  padding: 20px;
+  width: 100%;
+  border: 1px solid silver;
+  background: #fff;
+  line-height: 1.5em;
+  letter-spacing: 0.3px;
+  color: #444;
+}
+
+#github-tab:checked ~ figure .github-tab,
+#azure-tab:checked ~ figure .azure-tab { display: block; }
+
+nav label {
+  float: left;
+  padding: 15px 25px;
+  border-top: 1px solid silver;
+  border-right: 1px solid silver;
+  background: #464646;
+  color: #eee;
+  cursor:pointer;
+}
+
+nav label:nth-child(1) { border-left: 1px solid silver; }
+nav label:hover { background: #464646; }
+nav label:active { background: #ffffff; }
+
+#github-tab:checked ~ nav label[for="github-tab"],
+#azure-tab:checked ~ nav label[for="azure-tab"]{
+  background: white;
+  color: #111;
+  position: relative;
+  border-bottom: none;
+}
+
+#github-tab:checked ~ nav label[for="github-tab"]:after,
+#azure-tab:checked ~ nav label[for="azure-tab"]:after{
+  content: "";
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: white;
+  left: 0;
+  bottom: -1px;
+}
+
+#github-tab:checked ~ nav label[for="github-tab"].valid,
+#azure-tab:checked ~ nav label[for="azure-tab"].valid,
+#github-tab ~ nav label[for="github-tab"].valid,
+#azure-tab ~ nav label[for="azure-tab"].valid{
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: center right 5px;
+  background-size: 15px;
+}
+
+#github-tab:checked ~ nav label[for="github-tab"].invalid,
+#azure-tab:checked ~ nav label[for="azure-tab"].invalid,
+#github-tab ~ nav label[for="github-tab"].invalid,
+#azure-tab ~ nav label[for="azure-tab"].invalid {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23dc3545' viewBox='-2 -2 7 7'%3e%3cpath stroke='%23dc3545' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center right 5px;
+  background-size: 15px;
 }
