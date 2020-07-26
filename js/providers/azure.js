@@ -6,7 +6,7 @@ class Azure {
     this.configuration = configuration;
 
     this.name = "azure";
-    this.baseUrl = "https://dev.azure.com/depositsolutions/_apis/git/pullrequests";
+    this.baseUrl = "https://dev.azure.com/" + this.configuration.workspace +  "/_apis/git/pullrequests";
     this.url = `${this.baseUrl}?api-version=5.1&searchCriteria.status=all`;
   }
 
@@ -47,6 +47,16 @@ class Azure {
 
       window.requestsData.setProviderData(self.name, toReview.map(pr => (self._prepareData(pr))));
     };
+
+    request.onerror = function(event) {
+      window.requestsData.setProviderError(self.name, { message: "Error happened", status: event.target.status, details: "" });
+      window.requestsData.setProviderData(self.name, []);
+    };
+
+    request.ontimeout = function() {
+      window.requestsData.setProviderError(self.name, { message: "Timeout error", status: "", details: "" });
+      window.requestsData.setProviderData(self.name, []);
+    }
 
     request.send();
   }

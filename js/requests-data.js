@@ -49,18 +49,17 @@ class RequestsData {
   _updateViews() {
     if (this.isLoading()) return;
 
+    let errors = this._errors();
+    let items = this.items();
+
     if (Object.keys(this.errors).length !== 0) {
-      let errors = this._errors();
-
       this._errorBadge(errors);
-      this._errorPopup(errors);
     } else {
-      let items = this.items();
-
       this._updateBadge(items);
-      this._notifications(items);
-      this._updatePopup(items);
     }
+
+    this._notifications(items);
+    this._updatePopupWithErrors(items, errors);
   }
 
   isLoading() {
@@ -90,13 +89,6 @@ class RequestsData {
     this.notifications.show(items);
   }
 
-  _updatePopup(items) {
-    if (this.popup === undefined) return;
-    if (this.isLoading()) return;
-
-    this.popup.show(items);
-  }
-
   _errorBadge(errors) {
     if (this.badge === undefined) return;
     if (this.isLoading()) return;
@@ -104,11 +96,11 @@ class RequestsData {
     this.badge.error(errors)
   }
 
-  _errorPopup(errors) {
+  _updatePopupWithErrors(items, errors) {
     if (this.popup === undefined) return;
     if (this.isLoading()) return;
 
-    this.popup.error(errors)
+    this.popup.showWithErrors(items, errors);
   }
 
   _errors() {
@@ -117,7 +109,14 @@ class RequestsData {
     Object.keys(this.errors).forEach(key => {
       let err = this.errors[key];
 
-      errors.push(`${key}: Status: ${err.status} | ${err.message} | ${err.details}`);
+      errors.push(
+        {
+          provider: key,
+          status: err.status,
+          message: err.message,
+          details: err.details
+        }
+      );
     });
 
     return errors;
