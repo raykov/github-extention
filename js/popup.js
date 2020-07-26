@@ -51,7 +51,7 @@ class Popup {
   }
 
   _allPRsListener(items) {
-    if (items.length === 0) return;
+    if (items.length < 2) return;
 
     document.getElementById("all-prs-button").addEventListener("click", () => {
       items.forEach(item => chrome.tabs.create({ url: item.htmlUrl }));
