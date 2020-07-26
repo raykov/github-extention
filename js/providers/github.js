@@ -22,7 +22,7 @@ class Github {
     request.onload = function() {
       if (this.status < 200 || this.status >= 400) {
         const errorBody = JSON.parse(this.response);
-        window.requestsData.setProviderError(self.name, { message: errorBody.message, status: this.status, details: errorBody.errors[0].message });
+        window.requestsData.setProviderError(self.name, { message: errorBody.message, status: this.status, details: errorBody && errorBody.errors ? errorBody.errors[0].message : this.response });
         return;
       }
 
@@ -31,8 +31,17 @@ class Github {
       window.requestsData.setProviderData(self.name, body.items.map(item => (self._prepareData(item))));
     };
 
-    request.send();
+    request.onerror = function(event) {
+      window.requestsData.setProviderError(self.name, { message: "Error happened", status: event.target.status, details: "" });
+      window.requestsData.setProviderData(self.name, []);
+    };
 
+    request.ontimeout = function() {
+      window.requestsData.setProviderError(self.name, { message: "Timeout error", status: "", details: "" });
+      window.requestsData.setProviderData(self.name, []);
+    }
+
+    request.send();
   }
 
   _authorization() {

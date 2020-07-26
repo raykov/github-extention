@@ -17,11 +17,11 @@
   text-align: center;
 }
 .review-requests .you-are-doing-well, .errors {
-  padding: 50px 0px 0px 0px;
+  padding: 50px 0px 50px 0px;
   font-size: 20px;
 }
 .review-requests .errors {
-  padding: 20px;
+  /*padding: 20px;*/
 }
 .review-requests a {
   color: #333333;
@@ -153,6 +153,15 @@ div.notify .header-wrapper, div.all-prs-button .wrapper
   -ms-box-sizing: border-box !important;
 }
 
+li.error div.notify .header-wrapper
+{
+  background: rgb(255,0,0); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(255,0,0,1) 0%, rgba(160,0,10,1) 44%, rgba(119,0,0,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(255,0,0,1) 0%,rgba(160,0,10,1) 44%,rgba(119,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(255,0,0,1) 0%,rgba(160,0,10,1) 44%,rgba(119,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#770000',GradientType=0 ); /* IE6-9 */
+}
+
 div.all-prs-button .wrapper {
   border-bottom: 0px solid #000;
 }
@@ -204,6 +213,11 @@ div.notify .content-wrapper
   padding-right: 15px;
   background-color: #555;
   width:100%
+}
+
+li.error div.notify .content-wrapper
+{
+  background-color: rgba(160,0,0,1);
 }
 
 div.notify .content-wrapper .lastest
