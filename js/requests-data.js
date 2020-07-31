@@ -39,6 +39,18 @@ class RequestsData {
     this._updateViews();
   }
 
+  mergeProviderData(provider, data) {
+    this.setProviderLoaded(provider);
+    this.providers[provider].concat(data);
+
+    this._updateViews();
+  }
+
+  resetProviderData(provider) {
+    this.setProviderLoaded(provider);
+    this.providers[provider] = [];
+  }
+
   setProviderError(provider, error) {
     this.setProviderLoaded(provider);
     this.errors[provider] = error;
