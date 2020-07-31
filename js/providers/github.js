@@ -7,7 +7,8 @@ class Github {
 
     this.name = "github";
     this.baseUrl = "https://api.github.com/search/issues";
-    this.url = `${this.baseUrl}?q=${this._requestParams()}`;
+    this.userTeamsUrl = "https://api.github.com/user/teams";
+    // this.url = `${this.baseUrl}?q=${this._requestParams()}`;
   }
 
   request() {
@@ -18,34 +19,10 @@ class Github {
     }
 
     window.requestsData.setProviderLoading(self.name);
+    window.requestsData.resetProviderData(self.name)
 
-    const request = new XMLHttpRequest();
-    request.open('GET', self.url, true);
-    request.setRequestHeader("Authorization", self._authorization());
-
-    request.onload = function() {
-      if (this.status < 200 || this.status >= 400) {
-        const errorBody = JSON.parse(this.response);
-        window.requestsData.setProviderError(self.name, { message: errorBody.message, status: this.status, details: errorBody && errorBody.errors ? errorBody.errors[0].message : this.response });
-        return;
-      }
-
-      const body = JSON.parse(this.response);
-
-      window.requestsData.setProviderData(self.name, body.items.map(item => (self._prepareData(item))));
-    };
-
-    request.onerror = function(event) {
-      window.requestsData.setProviderError(self.name, { message: "Error happened", status: event.target.status, details: "" });
-      window.requestsData.setProviderData(self.name, []);
-    };
-
-    request.ontimeout = function() {
-      window.requestsData.setProviderError(self.name, { message: "Timeout error", status: "", details: "" });
-      window.requestsData.setProviderData(self.name, []);
-    }
-
-    request.send();
+    self._getUserReviewRequested();
+    self._getTeamsReviewRequested();
   }
 
   isEnabled() {
@@ -77,19 +54,108 @@ class Github {
     }
   }
 
-  _requestParams() {
+  _urlForUser(){
+    return `${this.baseUrl}?q=${this._requestParamsForUser()}`;
+  }
+
+  _urlForTeam(teamName){
+    return `${this.baseUrl}?q=${this._requestParamsForTeam(teamName)}`;
+  }
+
+  _requestParamsForUser() {
+    return this._requestParams(`review-requested:${this.configuration.username}`);
+  }
+
+  _requestParamsForTeam(team) {
+    return this._requestParams(`team-review-requested:${team}`);
+  }
+
+  _requestParams(reviewRequestedFrom) {
     let data = [];
     // is:pr+is:open+review-requested:${backgrounds.githubConfigs.username}+user:raykov
 
     data.push(`is:${this.configuration.is}`);
     data.push(`state:${this.configuration.state}`);
-    data.push(`review-requested:${this.configuration.username}`);
+    data.push(reviewRequestedFrom);
     if (this.configuration.user     !== "") data.push(`user:${this.configuration.user}`);
     if (this.configuration.repo     !== "") data.push(`repo:${this.configuration.repo}`);
     if (this.configuration.author   !== "") data.push(`author:${this.configuration.author}`);
     if (this.configuration.mentions !== "") data.push(`mentions:${this.configuration.mentions}`);
 
     return data.join("+")
+  }
+
+  _getUserReviewRequested() {
+    let self = this;
+    const request = new XMLHttpRequest();
+    request.open('GET', self._urlForUser(), true);
+    request.setRequestHeader("Authorization", self._authorization());
+
+    request.onload = function() {
+      if (this.status < 200 || this.status >= 400) {
+        const errorBody = JSON.parse(this.response);
+        window.requestsData.setProviderError(self.name, { message: errorBody.message, status: this.status, details: errorBody && errorBody.errors ? errorBody.errors[0].message : this.response });
+        return;
+      }
+
+      const body = JSON.parse(this.response);
+
+      window.requestsData.mergeProviderData(self.name, body.items.map(item => (self._prepareData(item))));
+    };
+
+    request.onerror = function(event) {
+      window.requestsData.setProviderError(self.name, { message: "Error happened", status: event.target.status, details: "" });
+      // window.requestsData.setProviderData(self.name, []);
+    };
+
+    request.ontimeout = function() {
+      window.requestsData.setProviderError(self.name, { message: "Timeout error", status: "", details: "" });
+      // window.requestsData.setProviderData(self.name, []);
+    }
+
+    request.send();
+  }
+
+  _getTeamsReviewRequested() {
+    let self = this;
+    const request = new XMLHttpRequest();
+    request.open('GET', self.userTeamsUrl, true);
+    request.setRequestHeader("Authorization", self._authorization());
+
+    request.onload = function() {
+      if (this.status < 200 || this.status >= 400) {
+        return;
+      }
+
+      const body = JSON.parse(this.response);
+
+      body.map(team => {
+        let teamName = `${team.organization.login}/${team.slug}`;
+
+        self._getTeamReviewRequested(teamName);
+      })
+    };
+
+    request.send();
+  }
+
+  _getTeamReviewRequested(teamName) {
+    let self = this;
+    const request = new XMLHttpRequest();
+    request.open('GET', self._urlForTeam(teamName), true);
+    request.setRequestHeader("Authorization", self._authorization());
+
+    request.onload = function() {
+      if (this.status < 200 || this.status >= 400) {
+        return;
+      }
+
+      const body = JSON.parse(this.response);
+
+      window.requestsData.mergeProviderData(self.name, body.items.map(item => (self._prepareData(item))));
+    };
+
+    request.send();
   }
 }
 
