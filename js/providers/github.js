@@ -155,7 +155,13 @@ class Github {
 
       const body = JSON.parse(this.response);
 
-      window.requestsData.mergeProviderData(self.name, body.items.map(item => (self._prepareData(item))));
+      let data = [];
+
+      body.items.forEach(item => {
+        if (item.user.login !== self.configuration.username) data.push(self._prepareData(item));
+      })
+
+      window.requestsData.mergeProviderData(self.name, data);
     };
 
     request.send();
