@@ -41,7 +41,7 @@ class RequestsData {
 
   mergeProviderData(provider, data) {
     this.setProviderLoaded(provider);
-    this.providers[provider].concat(data);
+    this.providers[provider] = this.providers[provider].concat(data);
 
     this._updateViews();
   }

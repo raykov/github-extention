@@ -90,6 +90,7 @@ class Github {
     const request = new XMLHttpRequest();
     request.open('GET', self._urlForUser(), true);
     request.setRequestHeader("Authorization", self._authorization());
+    request.setRequestHeader("Accept", "application/vnd.github.v3+json");
 
     request.onload = function() {
       if (this.status < 200 || this.status >= 400) {
@@ -121,6 +122,7 @@ class Github {
     const request = new XMLHttpRequest();
     request.open('GET', self.userTeamsUrl, true);
     request.setRequestHeader("Authorization", self._authorization());
+    request.setRequestHeader("Accept", "application/vnd.github.v3+json");
 
     request.onload = function() {
       if (this.status < 200 || this.status >= 400) {
@@ -144,6 +146,7 @@ class Github {
     const request = new XMLHttpRequest();
     request.open('GET', self._urlForTeam(teamName), true);
     request.setRequestHeader("Authorization", self._authorization());
+    request.setRequestHeader("Accept", "application/vnd.github.v3+json");
 
     request.onload = function() {
       if (this.status < 200 || this.status >= 400) {
