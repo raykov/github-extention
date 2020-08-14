@@ -1,7 +1,9 @@
 {
-  "name": "Github review requests list",
-  "version": "0.6.0",
-  "description": "Github review requests list",
+  "name": "Github and Azure review requests list",
+  "short_name": "Review requests list",
+  "author": "Andrii Raikov",
+  "version": "0.7.0",
+  "description": "Github and Azure review requests list",
   "manifest_version": 2,
   "background": {
     "persistent": false,
