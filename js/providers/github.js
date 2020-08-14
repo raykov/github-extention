@@ -41,7 +41,7 @@ class Github {
   }
 
   _prepareData(item) {
-    return {
+    return [item.id, {
       id:             item.id,
       nodeId:         item.node_id,
       repo:           item.repository_url.substring(item.repository_url.lastIndexOf("/") + 1),
@@ -51,7 +51,7 @@ class Github {
       title:          item.title,
       createdAt:      item.created_at,
       provider:       this.name
-    }
+    }]
   }
 
   _urlForUser(){
@@ -101,7 +101,15 @@ class Github {
 
       const body = JSON.parse(this.response);
 
-      window.requestsData.mergeProviderData(self.name, body.items.map(item => (self._prepareData(item))));
+      let items = {};
+
+      body.items.forEach(item => {
+        let data = self._prepareData(item)
+
+        items[data[0]] = data[1]
+      })
+
+      window.requestsData.mergeProviderData(self.name, items);
     };
 
     request.onerror = function(event) {
@@ -134,6 +142,8 @@ class Github {
       body.map(team => {
         let teamName = `${team.organization.login}/${team.slug}`;
 
+        window.requestsData.setProviderLoading(self.name);
+
         self._getTeamReviewRequested(teamName);
       })
     };
@@ -155,13 +165,17 @@ class Github {
 
       const body = JSON.parse(this.response);
 
-      let data = [];
+      let items = [];
 
       body.items.forEach(item => {
-        if (item.user.login !== self.configuration.username) data.push(self._prepareData(item));
+        if (item.user.login !== self.configuration.username) {
+          let data = self._prepareData(item);
+
+          items[data[0]] = data[1];
+        }
       })
 
-      window.requestsData.mergeProviderData(self.name, data);
+      window.requestsData.mergeProviderData(self.name, items);
     };
 
     request.send();

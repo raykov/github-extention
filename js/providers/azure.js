@@ -40,16 +40,22 @@ class Azure {
 
       const body = JSON.parse(this.response);
 
-      const toReview = body["value"].filter(pr => {
-        return pr["status"] === "active" &&
-               pr["reviewers"].filter(reviewer => {
-                 // could be -10, -5, 0, 5, 10
-                 return reviewer["vote"] === 0 &&
-                        reviewer["uniqueName"] === self.configuration.user
-               }).length > 0
-      });
+      let items = {};
+      body["value"].forEach(pr => {
+        if (pr["status"] === "active" &&
+            pr["reviewers"].filter(reviewer => {
+              // could be -10, -5, 0, 5, 10
+              return reviewer["vote"] === 0 &&
+                reviewer["uniqueName"] === self.configuration.user
+            }).length > 0) {
 
-      window.requestsData.setProviderData(self.name, toReview.map(pr => (self._prepareData(pr))));
+          let data = self._prepareData(pr)
+
+          items[data[0]] = data[1];
+        }
+      })
+
+      window.requestsData.setProviderData(self.name, items);
     };
 
     request.onerror = function(event) {
@@ -82,7 +88,7 @@ class Azure {
   }
 
   _prepareData(pr) {
-    return {
+    return [pr.pullRequestId, {
       id:             pr.pullRequestId,
       nodeId:         pr.pullRequestId,
       repo:           pr.repository.name,
@@ -100,6 +106,6 @@ class Azure {
       title:          pr.title,
       createdAt:      pr.creationDate,
       provider:       this.name
-    }
+    }]
   }
 }
