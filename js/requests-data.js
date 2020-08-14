@@ -80,14 +80,17 @@ class RequestsData {
     return Object.keys(this.loading).length > 0
   }
 
-  setProviderLoading(provider) {
+  setLoadingBadge() {
     this.badge.loading();
+  }
+
+  setProviderLoading(provider) {
     if (this.loading[provider] === undefined) this.loading[provider] = 0;
     this.loading[provider] ++;
   }
 
   setProviderLoaded(provider) {
-    this.loading[provider] --;
+    if (this.loading[provider] > 0) this.loading[provider] --;
     if (this.loading[provider] < 1) delete this.loading[provider];
   }
 

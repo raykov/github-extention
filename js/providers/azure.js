@@ -17,6 +17,7 @@ class Azure {
       return
     }
 
+    window.requestsData.setLoadingBadge();
     window.requestsData.setProviderLoading(self.name);
 
     if (self.configuration.token === "" || self.configuration.token === null || self.configuration.token === undefined) {

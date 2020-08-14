@@ -18,6 +18,7 @@ class Github {
       return
     }
 
+    window.requestsData.setLoadingBadge();
     window.requestsData.setProviderLoading(self.name);
     window.requestsData.resetProviderData(self.name)
 
