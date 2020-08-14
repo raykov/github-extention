@@ -18,7 +18,8 @@ class RequestsData {
     let items = [];
 
     Object.keys(this.providers).forEach(key => {
-      items = items.concat(this.providers[key]);
+      items = items.concat(Object.values(this.providers[key]));
+      // items = Object.assign({}, items, this.providers[key]);
     });
 
     return items;
@@ -41,14 +42,15 @@ class RequestsData {
 
   mergeProviderData(provider, data) {
     this.setProviderLoaded(provider);
-    this.providers[provider] = this.providers[provider].concat(data);
+
+    this.providers[provider] = Object.assign({}, this.providers[provider], data);
 
     this._updateViews();
   }
 
   resetProviderData(provider) {
     this.setProviderLoaded(provider);
-    this.providers[provider] = [];
+    this.providers[provider] = {};
   }
 
   setProviderError(provider, error) {
@@ -80,11 +82,13 @@ class RequestsData {
 
   setProviderLoading(provider) {
     this.badge.loading();
-    this.loading[provider] = true;
+    if (this.loading[provider] === undefined) this.loading[provider] = 0;
+    this.loading[provider] ++;
   }
 
   setProviderLoaded(provider) {
-    delete this.loading[provider];
+    this.loading[provider] --;
+    if (this.loading[provider] < 1) delete this.loading[provider];
   }
 
   _updateBadge(items) {
