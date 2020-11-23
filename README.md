@@ -9,6 +9,6 @@
 * Find the path where you cloned this repo.
 * Install it.
 * You would be asked about to setup github token and user name.
-* Go to https://github.com/settings/tokens and create a new token with "repo" access.
+* Go to https://github.com/settings/tokens and create a new token with "read:org, read:repo_hook, read:user, repo, workflow" access and enabled SSO.
 * Save your token and username.
 * Enjoy.
